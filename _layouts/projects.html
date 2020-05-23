@@ -1,12 +1,11 @@
 ---
 layout: default
 ---
-
+<div class = "container"> 
+<img src= "/assets/img/Thinking_Stick.png" class="top-left-img-grid" />
 <div class="grid">
-
   {% for project in site.projects reversed %}
-  
-    <article role="article" class="card">
+    <article role="article" class="card" style="background:#{{project.color}};">
 	    <div class="meta">
       <h2><a href="{{ site.baseurl }}{{ project.url }}">
         {{ project.title }}
@@ -19,4 +18,6 @@ layout: default
     
   {% endfor %}
   
+</div>
+
 </div>
