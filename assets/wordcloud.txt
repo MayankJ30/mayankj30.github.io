@@ -1,0 +1,11 @@
+9 Student
+8 Thinker
+8 Entrepreneur
+7 Researcher
+5 Foodie
+6 Music Producer
+4 Fitness Enthusiast
+5 Productivity Nerd
+8 Builder
+7 Technologist
+4 Music Lover
