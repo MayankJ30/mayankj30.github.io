@@ -28,7 +28,7 @@ var currentLetter = 'a'.charCodeAt(0);
 //You can add stuff in here. This is just a basic implementation.
 function setup()
 {
-  let cnv = createCanvas(800, 800); //Sets the size of the app. You should modify this to your device's native size. Many phones today are 1080 wide by 1920 tall.
+  let cnv = createCanvas(800, 1500); //Sets the size of the app. You should modify this to your device's native size. Many phones today are 1080 wide by 1920 tall.
   // p5.js specific code to prevent double clicks from selecting stuff from outside the canvas
   cnv.parent("container");
   canvas.onselectstart = function () { return false; }
@@ -99,14 +99,15 @@ function draw()
     fill(128);
     text("Phrase " + (currTrialNum+1) + " of " + totalTrialNum, 70, 50); //draw the trial count
     fill(128);
-    text("Target:   " + currentPhrase, 70, 100); //draw the target string
-    text("Entered:  " + currentTyped + "|", 70, 140); //draw what the user has entered thus far 
+    text("Target:   " , 70, 100); //draw the target string
+    text(currentPhrase , 70, 140);
+    text("Entered:  " + currentTyped + "|", 70, 200); //draw what the user has entered thus far 
 
     //draw very basic next button
     fill(255, 0, 0);
-    rect(600, 600, 200, 200); //draw next button
+    rect(600, 1000, 200, 200); //draw next button
     fill(255);
-    text("NEXT > ", 650, 650); //draw next label
+    text("NEXT > ", 650, 1050); //draw next label
 
     //my draw code that you should replace.
     fill(255, 0, 0); //red button
@@ -161,7 +162,7 @@ function mouseClicked()
   }
 
   //You are allowed to have a next button outside the 1" area
-  if (didMouseClick(600, 600, 200, 200)) //check if click is in next button
+  if (didMouseClick(600, 1000, 200, 200)) //check if click is in next button
   {
     nextTrial(); //if so, advance to next trial
   }
