@@ -28,7 +28,7 @@ var currentLetter = 'a'.charCodeAt(0);
 //You can add stuff in here. This is just a basic implementation.
 function setup()
 {
-  let cnv = createCanvas(800, 1500); //Sets the size of the app. You should modify this to your device's native size. Many phones today are 1080 wide by 1920 tall.
+  let cnv = createCanvas(1080, 1500); //Sets the size of the app. You should modify this to your device's native size. Many phones today are 1080 wide by 1920 tall.
   // p5.js specific code to prevent double clicks from selecting stuff from outside the canvas
   cnv.parent("container");
   canvas.onselectstart = function () { return false; }
@@ -101,7 +101,8 @@ function draw()
     fill(128);
     text("Target:   " , 70, 100); //draw the target string
     text(currentPhrase , 70, 140);
-    text("Entered:  " + currentTyped + "|", 70, 200); //draw what the user has entered thus far 
+    text("Entered:  " , 70, 200) 
+    text(currentTyped + "|", 70, 240); //draw what the user has entered thus far 
 
     //draw very basic next button
     fill(255, 0, 0);
