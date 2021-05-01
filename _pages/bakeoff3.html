@@ -25,10 +25,33 @@ var started = false;
 //Variables for my silly implementation. You can delete this:
 var currentLetter = 'a'.charCodeAt(0);
 
+var watchtopleftX; 
+var watchtopleftY;
+var keyWidth = sizeOfInputArea/3;
+var keyHeight = sizeOfInputArea/4;
+
+var letters = ['abc', 'def', 'ghi', 'jkl', 'mno', 'pqrs' , 'tuv', 'wxyz', '_`']
+var keycoords = []
+
+var clickedLetters2 = [];
+var keyWidth2 = sizeOfInputArea/2;
+var clickedKeycoords2 = [];
+
+var clickedLetters3 = [];
+var clickedKeycoords3 = [];
+
+var clickedLetters4 = [];
+var keyWidth4 = sizeOfInputArea/4;
+var clickedKeycoords4 = [];
+
+
+
+
+
 //You can add stuff in here. This is just a basic implementation.
 function setup()
 {
-  let cnv = createCanvas(1080, 1500); //Sets the size of the app. You should modify this to your device's native size. Many phones today are 1080 wide by 1920 tall.
+  let cnv = createCanvas(1080, 1300); //Sets the size of the app. You should modify this to your device's native size. Many phones today are 1080 wide by 1920 tall.
   // p5.js specific code to prevent double clicks from selecting stuff from outside the canvas
   cnv.parent("container");
   canvas.onselectstart = function () { return false; }
@@ -36,6 +59,8 @@ function setup()
   textSize(50);
   noStroke(); //my code doesn't use any strokes.
 
+  watchtopleftX = width/2-sizeOfInputArea/2;
+  watchtopleftY = height/2-sizeOfInputArea/2
   //randomize the phrase order
   for (var i=0; i<phrases.length; i++)
   {
@@ -44,6 +69,23 @@ function setup()
     phrases[i] = phrases[r];
     phrases[r] = temp;
    }
+
+  let count = 0;
+  
+  for (var j = 1; j <4; j++) {
+    for (var i = 0; i < 3; i++) {
+      keycoords.push([watchtopleftX + i*keyWidth, watchtopleftY + j*keyHeight]);
+    }
+  }
+
+  for (var i = 0; i < 2; i++) 
+    clickedKeycoords2.push([watchtopleftX + i*keyWidth2, watchtopleftY]);
+  
+  for (var i = 0; i < 3; i++) 
+    clickedKeycoords3.push([watchtopleftX + i*keyWidth, watchtopleftY]);
+  
+  for (var i = 0; i < 4; i++) 
+    clickedKeycoords4.push([watchtopleftX + i*keyWidth4, watchtopleftY]);
 
 }
 
@@ -111,13 +153,72 @@ function draw()
     text("NEXT > ", 650, 1050); //draw next label
 
     //my draw code that you should replace.
-    fill(255, 0, 0); //red button
-    rect(width/2-sizeOfInputArea/2, height/2-sizeOfInputArea/2+sizeOfInputArea/2, sizeOfInputArea/2, sizeOfInputArea/2); //draw left red button
-    fill(0, 255, 0); //green button
-    rect(width/2-sizeOfInputArea/2+sizeOfInputArea/2, height/2-sizeOfInputArea/2+sizeOfInputArea/2, sizeOfInputArea/2, sizeOfInputArea/2); //draw right green button
-    textAlign(CENTER);
-    fill(200);
-    text(String(char(currentLetter)), width/2, height/2-sizeOfInputArea/4); //draw current letter
+    // fill(255, 0, 0); //red button
+    // rect(width/2-sizeOfInputArea/2, height/2-sizeOfInputArea/2+sizeOfInputArea/2, sizeOfInputArea/2, sizeOfInputArea/2); //draw left red button
+    // fill(0, 255, 0); //green button
+    // rect(width/2-sizeOfInputArea/2+sizeOfInputArea/2, height/2-sizeOfInputArea/2+sizeOfInputArea/2, sizeOfInputArea/2, sizeOfInputArea/2); //draw right green button
+    // textAlign(CENTER);
+    // fill(200);
+    // text(String(char(currentLetter)), width/2, height/2-sizeOfInputArea/4); //draw current letter
+
+    
+    
+
+    for (let c =0 ; c < letters.length; c++) {
+      fill(0,0,0);
+      stroke(255, 204, 0);
+      strokeWeight(4);
+      rect(keycoords[c][0], keycoords[c][1], keyWidth, keyHeight);
+      noStroke();
+      fill(255, 255, 255)
+      text(letters[c], keycoords[c][0], keycoords[c][1] + keyHeight/2);
+    }
+    noStroke();
+
+
+    if (clickedLetters2.length > 0) {
+      for (let c =0 ; c < clickedLetters2.length; c++) {
+      fill(0,0,0);
+      stroke(255, 204, 0);
+      strokeWeight(4);
+      rect(clickedKeycoords2[c][0], clickedKeycoords2[c][1], keyWidth2, keyHeight);
+      noStroke();
+      fill(255, 255, 255)
+      text(clickedLetters2[c], clickedKeycoords2[c][0] + keyWidth2/2, clickedKeycoords2[c][1] + keyHeight/2);
+    }
+    noStroke();
+    }
+
+
+    if (clickedLetters3.length > 0) {
+      for (let c =0 ; c < clickedLetters3.length; c++) {
+      fill(0,0,0);
+      stroke(255, 204, 0);
+      strokeWeight(4);
+      rect(clickedKeycoords3[c][0], clickedKeycoords3[c][1], keyWidth, keyHeight);
+      noStroke();
+      fill(255, 255, 255)
+      text(clickedLetters3[c], clickedKeycoords3[c][0] + keyWidth/2, clickedKeycoords3[c][1] + keyHeight/2);
+    }
+    noStroke();
+    }
+
+
+    if (clickedLetters4.length > 0) {
+      for (let c =0 ; c < clickedLetters4.length; c++) {
+      fill(0,0,0);
+      stroke(255, 204, 0);
+      strokeWeight(4);
+      rect(clickedKeycoords4[c][0], clickedKeycoords4[c][1], keyWidth4, keyHeight);
+      noStroke();
+      fill(255, 255, 255)
+      text(clickedLetters4[c], clickedKeycoords4[c][0] + keyWidth4/2, clickedKeycoords4[c][1] + keyHeight/2);
+    }
+    noStroke();
+    }
+
+
+
   }
 }
 
@@ -134,33 +235,87 @@ function mouseClicked()
     started = true;
     return;
   }
-
-  print("mousePress!");
-  if (didMouseClick(width/2-sizeOfInputArea/2, height/2-sizeOfInputArea/2+sizeOfInputArea/2, sizeOfInputArea/2, sizeOfInputArea/2)) //check if click in left button
-  {
-    if (int(currentLetter)<=95) //wrap around to z
-      currentLetter = ('z').charCodeAt(0);
-   else
-    currentLetter--;
+  for (let c = 0; c < letters.length; c++) {
+    if (didMouseClick(keycoords[c][0], keycoords[c][1], keyWidth, keyHeight)) {
+      print(letters[c]);
+      // currentTyped = currentTyped + letters[c][0];
+      clickedLetters3 = clickedLetters4 = clickedLetters2 = [];
+      if (letters[c].length == 2)
+        clickedLetters2 = letters[c].split(''); 
+      if (letters[c].length == 3)
+        clickedLetters3 = letters[c].split('');
+      if (letters[c].length == 4)
+        clickedLetters4 = letters[c].split('');
+ 
+    }
   }
 
-  if (didMouseClick(width/2-sizeOfInputArea/2+sizeOfInputArea/2, height/2-sizeOfInputArea/2+sizeOfInputArea/2, sizeOfInputArea/2, sizeOfInputArea/2)) //check if click in right button
-  {
-    if (int(currentLetter)>=122) //wrap back to space (aka underscore)
-      currentLetter = ('_').charCodeAt(0);
-   else
-    currentLetter++;
+  if (clickedLetters2.length > 0) {
+    for (let c = 0; c < clickedLetters2.length; c++) {
+      if (didMouseClick(clickedKeycoords2[c][0], clickedKeycoords2[c][1], keyWidth2, keyHeight)) {
+        print(clickedLetters2[c]);
+        if (clickedLetters2[c]=='_') //if underscore, consider that a space bar
+          currentTyped = currentTyped + String(" ");
+        else if (clickedLetters2[c]=='`' & currentTyped.length>0) //if `, treat that as a delete command
+          currentTyped = currentTyped.substring(0, currentTyped.length-1);
+
+        // clickedLetters2 = [];
+        return;
+      }
+    
+    }
   }
 
-  if (didMouseClick(width/2-sizeOfInputArea/2, height/2-sizeOfInputArea/2, sizeOfInputArea, sizeOfInputArea/2)) //check if click occured in letter area
-  {
-    if (currentLetter=='_'.charCodeAt(0)) //if underscore, consider that a space bar
-      currentTyped = currentTyped + String(" ");
-    else if (currentLetter=='`'.charCodeAt(0) & currentTyped.length>0) //if `, treat that as a delete command
-      currentTyped = currentTyped.substring(0, currentTyped.length-1);
-    else if (currentLetter!='`'.charCodeAt(0)) //if not any of the above cases, add the current letter to the typed string
-      currentTyped = currentTyped + String(char(currentLetter));
+  if (clickedLetters3.length > 0) {
+    for (let c = 0; c < clickedLetters3.length; c++) {
+      if (didMouseClick(clickedKeycoords3[c][0], clickedKeycoords3[c][1], keyWidth, keyHeight)) {
+        print(clickedLetters3[c]);
+        currentTyped = currentTyped + clickedLetters3[c];
+        // clickedLetters3 = [];
+        return;
+      }
+    
+    }
   }
+
+  if (clickedLetters4.length > 0) {
+    for (let c = 0; c < clickedLetters4.length; c++) {
+      if (didMouseClick(clickedKeycoords4[c][0], clickedKeycoords4[c][1], keyWidth4, keyHeight)) {
+        print(clickedLetters4[c]);
+        currentTyped = currentTyped + clickedLetters4[c];
+        // clickedLetters4 = [];
+        return;
+      }
+    
+    }
+  }
+
+  // print("mousePress!");
+  // if (didMouseClick(width/2-sizeOfInputArea/2, height/2-sizeOfInputArea/2+sizeOfInputArea/2, sizeOfInputArea/2, sizeOfInputArea/2)) //check if click in left button
+  // {
+  //   if (int(currentLetter)<=95) //wrap around to z
+  //     currentLetter = ('z').charCodeAt(0);
+  //  else
+  //   currentLetter--;
+  // }
+
+  // if (didMouseClick(width/2-sizeOfInputArea/2+sizeOfInputArea/2, height/2-sizeOfInputArea/2+sizeOfInputArea/2, sizeOfInputArea/2, sizeOfInputArea/2)) //check if click in right button
+  // {
+  //   if (int(currentLetter)>=122) //wrap back to space (aka underscore)
+  //     currentLetter = ('_').charCodeAt(0);
+  //  else
+  //   currentLetter++;
+  // }
+
+  // if (didMouseClick(width/2-sizeOfInputArea/2, height/2-sizeOfInputArea/2, sizeOfInputArea, sizeOfInputArea/2)) //check if click occured in letter area
+  // {
+  //   if (currentLetter=='_'.charCodeAt(0)) //if underscore, consider that a space bar
+  //     currentTyped = currentTyped + String(" ");
+  //   else if (currentLetter=='`'.charCodeAt(0) & currentTyped.length>0) //if `, treat that as a delete command
+  //     currentTyped = currentTyped.substring(0, currentTyped.length-1);
+  //   else if (currentLetter!='`'.charCodeAt(0)) //if not any of the above cases, add the current letter to the typed string
+  //     currentTyped = currentTyped + String(char(currentLetter));
+  // }
 
   //You are allowed to have a next button outside the 1" area
   if (didMouseClick(600, 1000, 200, 200)) //check if click is in next button
@@ -733,7 +888,7 @@ phrases =["my watch fell in the water",
 </head>
 
 <body> 
-  <main  style="touch-action: manipulation;">
+  <main  style="touch-action: none;">
     <h1>Bakeoff 3</h1>
     <div id="container"> </div>
   </main>
