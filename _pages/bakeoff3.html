@@ -21,7 +21,7 @@ var lettersExpectedTotal = 0; //a running total of the number of letters expecte
 var errorsTotal = 0; //a running total of the number of errors (when hitting next)
 var currentPhrase = ""; //the current target phrase
 var currentTyped = ""; //what the user has typed so far
-
+var started = false;
 //Variables for my silly implementation. You can delete this:
 var currentLetter = 'a'.charCodeAt(0);
 
@@ -79,7 +79,7 @@ function draw()
   rect(width/2-sizeOfInputArea/2, height/2-sizeOfInputArea/2, sizeOfInputArea, sizeOfInputArea); //input area should be 1" by 1"
 
   //check to see if the user hasn't started yet
-  if (startTime==0 & !mouseIsPressed)
+  if (startTime==0 & !started)
   {
     fill(128);
     textAlign(CENTER);
@@ -128,6 +128,11 @@ function didMouseClick( x,  y,  w,  h) //simple function to do hit testing
 // //you can replace all of this logic.
 function mouseClicked()
 {
+  if (!started) {
+    started = true;
+    return;
+  }
+
   print("mousePress!");
   if (didMouseClick(width/2-sizeOfInputArea/2, height/2-sizeOfInputArea/2+sizeOfInputArea/2, sizeOfInputArea/2, sizeOfInputArea/2)) //check if click in left button
   {
@@ -726,9 +731,9 @@ phrases =["my watch fell in the water",
 </head>
 
 <body> 
-  <main>
+  <main  style="touch-action: manipulation;">
     <h1>Bakeoff 3</h1>
-    <div id="container" style="touch-action: manipulation;"> </div>
+    <div id="container"> </div>
   </main>
 </body>
 </html>
