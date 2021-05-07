@@ -249,6 +249,12 @@ function didMouseClickCenter( x,  y,  w,  h) //simple function to do hit testing
   return (mouseX > x && mouseX<x+w && mouseY>y && mouseY<y+h); //check to see if it is in button bounds
 }
 
+function didMouseClickCenterLax( x,  y,  w,  h) //simple function to do hit testing
+{
+  x  = x - w/2;
+  y = y - h/2;
+  return (mouseX > x && mouseX<x+w); //check to see if it is in button bounds
+}
 
 
 // //you can replace all of this logic.
@@ -288,7 +294,7 @@ function mousePressed()
         let innerCenterX = innerArr[c].x;
         let innerCenterY = innerArr[c].y;
 
-        if (didMouseClickCenter(innerCenterX, innerCenterY, innerWidth, innerHeight)) {
+        if (didMouseClickCenterLax(innerCenterX, innerCenterY, innerWidth, innerHeight)) {
           currentInner = innerArr[c];
           innerArr[c].pressed = 1;
         }
@@ -317,7 +323,7 @@ function mouseDragged() {
         let innerCenterX = innerArr[c].x;
         let innerCenterY = innerArr[c].y;
 
-        if (didMouseClickCenter(innerCenterX, innerCenterY, innerWidth, innerHeight)) {
+        if (didMouseClickCenterLax(innerCenterX, innerCenterY, innerWidth, innerHeight)) {
           if (currentInner && currentInner != innerArr[c]) 
             currentInner.pressed = 0;
           currentInner = innerArr[c];
