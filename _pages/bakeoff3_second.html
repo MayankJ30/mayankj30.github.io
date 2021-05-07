@@ -22,8 +22,10 @@ var errorsTotal = 0; //a running total of the number of errors (when hitting nex
 var currentPhrase = ""; //the current target phrase
 var currentTyped = ""; //what the user has typed so far
 var started = false;
+
+
 //Variables for my silly implementation. You can delete this:
-var currentLetter = 'a'.charCodeAt(0);
+
 
 var watchtopleftX; 
 var watchtopleftY;
@@ -43,6 +45,8 @@ var keycoords = []
 
 var currentKey, currentInner;
 
+var backspaceObj; 
+var spaceObj;
 
 
 //You can add stuff in here. This is just a basic implementation.
@@ -100,6 +104,11 @@ function setup()
 
     }
   }
+
+  spaceObj = {'x' : watchtopleftX + sizeOfInputArea/4, 'y' : watchtopleftY + 3*keyHeight + keyHeight/2, 'pressed': 0, 'char': '_'};
+  backspaceObj = {'x' : watchtopleftX + sizeOfInputArea/2 + sizeOfInputArea/4, 'y' : watchtopleftY + 3*keyHeight + keyHeight/2, 'pressed': 0, 'char': '`'}
+
+
 
   
 
@@ -231,6 +240,32 @@ function draw()
       
       
     }
+  
+    if (spaceObj.pressed == 1) 
+        fill(59, 177, 67, 200);
+    else
+      fill(128, 200);
+    
+    stroke(237, 230, 230);
+    strokeWeight(2);
+    rect(spaceObj.x, spaceObj.y, sizeOfInputArea/2, keyHeight, 10);
+    fill(255, 255, 255);
+    noStroke();
+    text(spaceObj.char,spaceObj.x, spaceObj.y,);
+
+    if (backspaceObj.pressed == 1) 
+        fill(59, 177, 67, 200);
+    else
+      fill(128, 200);
+    
+    stroke(237, 230, 230);
+    strokeWeight(2);
+    rect(backspaceObj.x, backspaceObj.y, sizeOfInputArea/2, keyHeight, 10);
+    fill(255, 255, 255);
+    noStroke();
+    text(backspaceObj.char,backspaceObj.x, backspaceObj.y,);
+
+
     rectMode(CORNER)  
 
 
@@ -285,9 +320,9 @@ function mousePressed()
     let innerArr = keycoords[i].inner;
     
     if (didMouseClickCenter(keyCenterX, keyCenterY, keyWidth, keyHeight)) {
-      print(letters[i]);
+      // print(letters[i]);
       keycoords[i].pressed = 1;
-      print(keycoords[i]);
+      // print(keycoords[i]);
       currentKey = keycoords[i];
 
       for (let c = 0; c < 3; c++) {
@@ -300,9 +335,18 @@ function mousePressed()
         }
       }
     }
-
-
   }
+    if (didMouseClickCenter(spaceObj.x, spaceObj.y, sizeOfInputArea/2, keyHeight)) {
+      spaceObj.pressed = 1;
+      currentKey = spaceObj;
+    }
+
+    if (didMouseClickCenter(backspaceObj.x, backspaceObj.y, sizeOfInputArea/2, keyHeight)) {
+      backspaceObj.pressed = 1;
+      currentKey = backspaceObj;
+    }
+
+
 
 
 
@@ -317,8 +361,8 @@ function mousePressed()
 }
 
 function mouseDragged() {
-  if (currentKey) {
-    let innerArr = currentKey.inner;
+  if (currentKey && currentKey != backspaceObj && currentKey != spaceObj) {
+    let innerArr = currentKey.inner; 
     for (let c = 0; c < 3; c++) {
         let innerCenterX = innerArr[c].x;
         let innerCenterY = innerArr[c].y;
@@ -344,9 +388,19 @@ function mouseReleased() {
         currentTyped = currentTyped + char;
     
     currentInner.pressed = 0;
+    currentInner = null;
   }
-  if (currentKey) 
+
+  if (currentKey == backspaceObj & currentTyped.length>0) 
+    currentTyped = currentTyped.substring(0, currentTyped.length-1);
+  else if (currentKey == spaceObj)
+    currentTyped = currentTyped + String(" ");
+
+  if (currentKey) {
     currentKey.pressed = 0;
+    currentInner = null;
+  }
+    
 
     
   return false;
