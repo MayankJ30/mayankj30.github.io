@@ -42,7 +42,7 @@ var numCols = 10;
 
 var keyWidth = sizeOfInputArea/10;
 var keyHeight = sizeOfInputArea/(numRows + 1);
-
+var a = new Audio("assets/click.mp3");
 
 var currentKey;
 
@@ -89,6 +89,7 @@ function setup()
       }
     }
   }  
+
 
 let spaceObj = {} 
 spaceObj.char = '_'
@@ -242,6 +243,9 @@ function mouseDragged() {
 
 function mouseReleased() {
   if (currentKey) {
+    a.pause();
+    a.currentTime = 0; 
+
     let char = currentKey.char;
     if (char=='_') //if underscore, consider that a space bar
         currentTyped = currentTyped + String(" ");
@@ -252,6 +256,7 @@ function mouseReleased() {
     
     currentKey.pressed = 0;
     currentKey = null;
+    a.play();
   }
 
 
