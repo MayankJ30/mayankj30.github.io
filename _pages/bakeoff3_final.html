@@ -78,7 +78,7 @@ function setup()
         let charObj = {}
 
         charObj.x = watchtopleftX + j*keyWidth;
-        charObj.y = watchtopleftY + i*keyHeight;
+        charObj.y = watchtopleftY + i*keyHeight + keyHeight;
         charObj.width = keyWidth;
         charObj.height = keyHeight;
         charObj.pressed = false; 
@@ -97,7 +97,7 @@ spaceObj.pressed = false;
 spaceObj.height = keyHeight;
 spaceObj.width = sizeOfInputArea/2;
 spaceObj.x = watchtopleftX; 
-spaceObj.y = watchtopleftY + numRows*keyHeight;
+spaceObj.y = watchtopleftY ;
 
 let backspaceObj = {}
 backspaceObj.char = '`'
@@ -105,7 +105,7 @@ backspaceObj.pressed = false;
 backspaceObj.height = keyHeight;
 backspaceObj.width = sizeOfInputArea/2;
 backspaceObj.x = watchtopleftX + sizeOfInputArea/2; 
-backspaceObj.y = watchtopleftY + numRows*keyHeight;
+backspaceObj.y = watchtopleftY ;
 
 keycoords['_'] = spaceObj
 keycoords['`'] = backspaceObj
@@ -188,7 +188,23 @@ function draw()
       fill(255, 255, 255)
       text(key, value.x + value.width/4.5, value.y + value.height/1.5); 
     }
+    
+    if (currentKey && currentKey.char != '_' && currentKey.char != '`') {
+      fill(128);
+      noStroke();
+      rect(currentKey.x, currentKey.y-80, currentKey.width*2, currentKey.height);
+      noStroke();
+      fill(255, 255, 255)
+      textSize(50);
+
+      text(currentKey.char, currentKey.x + currentKey.width/4.5, currentKey.y-80 + currentKey.height/1.5); 
+      textSize(30);
+
+    }
+    
     noStroke();
+
+
   }
 }
 
