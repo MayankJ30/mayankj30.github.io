@@ -54,7 +54,7 @@ function setup()
   cnv.parent("container");
   canvas.onselectstart = function () { return false; }
 
-  textSize(30);
+  textSize(20);
   noStroke(); //my code doesn't use any strokes.
 
   watchtopleftX = width/2-sizeOfInputArea/2;
@@ -192,13 +192,13 @@ function draw()
     if (currentKey && currentKey.char != '_' && currentKey.char != '`') {
       fill(128);
       noStroke();
-      rect(currentKey.x, currentKey.y-85, currentKey.width*2, currentKey.height*1.2);
+      rect(currentKey.x, currentKey.y-50, currentKey.width*2, currentKey.height*1.2);
       noStroke();
       fill(255, 255, 255)
-      textSize(60);
+      textSize(50);
 
-      text(currentKey.char, currentKey.x + currentKey.width/4.5, currentKey.y-90 + currentKey.height/1.5); 
-      textSize(30);
+      text(currentKey.char, currentKey.x + currentKey.width/4.5, currentKey.y-50 + currentKey.height/1.5); 
+      textSize(20);
 
     }
     
