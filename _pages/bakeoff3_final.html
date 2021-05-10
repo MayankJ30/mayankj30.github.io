@@ -192,10 +192,10 @@ function draw()
     if (currentKey && currentKey.char != '_' && currentKey.char != '`') {
       fill(128);
       noStroke();
-      rect(currentKey.x, currentKey.y-80, currentKey.width*2, currentKey.height);
+      rect(currentKey.x, currentKey.y-80, currentKey.width*2, currentKey.height*1.5);
       noStroke();
       fill(255, 255, 255)
-      textSize(50);
+      textSize(60);
 
       text(currentKey.char, currentKey.x + currentKey.width/4.5, currentKey.y-80 + currentKey.height/1.5); 
       textSize(30);
